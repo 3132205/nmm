@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phong Bì Chúc Mừng 8/3</title>
+    <style>
+                
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .container {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: #b0413e;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            overflow: hidden;
+            cursor: pointer;
+            z-index: 2;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #d66;
+            clip-path: polygon(0% 0%, 50% 50%, 100% 0%);
+            transition: transform 0.5s;
+            z-index: 3;
+        }
+        .letter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            width: 100mm;
+            height: 140mm;
+            background: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            text-align: center;
+            font-size: 18px;
+            font-family: 'Dancing Script', cursive;
+            transition: transform 1s ease-in-out, opacity 0.5s ease-in-out;
+            z-index: 1;
+            opacity: 0;
+        }
+        .envelope.open {
+            opacity: 0;
+        }
+        .envelope.open ~ .letter {
+            transform: translateX(-50%) translateY(100px);
+            opacity: 1;
+        }
+        .flower {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: pink;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 5s linear infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function createFlower() {
+            const flower = document.createElement("div");
+            flower.classList.add("flower");
+            flower.style.left = Math.random() * 100 + "vw";
+            flower.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(flower);
+            setTimeout(() => {
+                flower.remove();
+            }, 5000);
+        }
+        setInterval(createFlower, 300);
+    </script>
+    
+    <div class="container" onclick="openEnvelope()">
+        <div class="envelope">
+            <div class="flap"></div>
+        </div>
+        <div class="letter">Chúc mừng Ngày Quốc tế Phụ nữ 8/3! 🌸
+
+            
+            Chúc cậu một ngày 8/3 thật đặc biệt và tràn đầy niềm vui! Mong rằng mọi điều tốt đẹp nhất sẽ đến với cậu, từ sức khỏe, hạnh phúc cho đến những thành công trong công việc và cuộc sống. Cảm ơn vì luôn là người bạn tuyệt vời, luôn mang đến năng lượng tích cực và niềm vui mỗi khi ở bên.
+            
+            Chúc cậu luôn mạnh mẽ, xinh đẹp và đong đầy yêu thương trong mọi khoảnh khắc. Hãy luôn giữ nụ cười trên môi và tiếp tục là chính mình nhé!
+            
+            Thân,
+            Mạnh</div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            let envelope = document.querySelector('.envelope');
+            let letter = document.querySelector('.letter');
+            
+            envelope.classList.add('open');
+            setTimeout(() => {
+                letter.style.opacity = '1';
+                letter.style.transform = 'translateX(-50%) translateY(100px)';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
